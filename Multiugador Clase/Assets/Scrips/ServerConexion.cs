@@ -15,16 +15,12 @@ public class ServerConexion : MonoBehaviourPunCallbacks
     }
 
  
-    public override void OnConnectToMaster()
-    {
-        Debug.Log("Nohemos conectado al master");
-
-        PhotonNetwork.JoinRandomOrCreateRoom();
-
-    }
+    
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.
+
+        PhotonNetwork.Instantiate(player.name, spawn.position, spawn.rotation);
     }
+
 }
