@@ -14,13 +14,17 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public void OnclickConnect()
 
     {
+        //verificar si hay un boton para la conexion 
+
         if (nameInpunt.text.Length >= 1)
         {
             PhotonNetwork.NickName = nameInpunt.text;
 
+            //guardar el nombre en un playerPref
+
             PlayerPrefs.SetString("PlayerName", nameInpunt.text);
 
-            button.text = "Conectando al servidos";
+            button.text = "Conectando al Servidor";
             PhotonNetwork.ConnectUsingSettings();
         }
     }

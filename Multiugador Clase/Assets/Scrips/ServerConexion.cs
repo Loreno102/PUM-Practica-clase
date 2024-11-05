@@ -5,13 +5,15 @@ using Photon.Pun;
 
 public class ServerConexion : MonoBehaviourPunCallbacks
 {
-    public PhotonView player;
+    public PhotonView playerPrefab;
 
     public Transform spawn;
+    
     void Start()
     {
         //conecion al servidor
-        PhotonNetwork.ConnectUsingSettings();
+        //PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.JoinRandomOrCreateRoom();
     }
 
  
@@ -20,7 +22,8 @@ public class ServerConexion : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
 
-        PhotonNetwork.Instantiate(player.name, spawn.position, spawn.rotation);
+        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, spawn.rotation);
+        player.GetComponent<PhotonView>().RPC("SetNameText", RpcTarget.AllBuffered, PlayerPrefs.GetString("PlayerName"));
     }
 
 }
